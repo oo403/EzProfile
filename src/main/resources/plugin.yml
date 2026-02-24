@@ -1,0 +1,4 @@
+name: EzProfile
+version: '1.0'
+main: org.sirox.ezprofile.EzProfile
+api-version: '1.21'
