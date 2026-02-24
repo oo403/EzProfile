@@ -25,6 +25,8 @@ dependencies {
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("eu.okaeri:okaeri-configs-serdes-bukkit:6.1.0-beta.1")
     implementation("dev.rollczi:litecommands-bukkit:3.10.2")
+    implementation("dev.rollczi:litecommands-adventure-platform:3.10.2")
+    implementation("dev.triumphteam:triumph-gui:3.1.13")
 }
 
 val targetJavaVersion = 21
@@ -37,6 +39,10 @@ tasks {
     shadowJar {
         archiveFileName.set("${project.name}-${project.version}.jar")
         destinationDirectory.set(file("$buildDir/libs"))
+
+        relocate("dev.triumph.gui", "org.sirox.ezprofile.gui")
+        relocate("eu.okaeri.configs", "org.sirox.ezprofile.configs")
+        relocate("dev.rollczi.litecommands", "org.sirox.ezprofile.commands")
     }
 
     runServer {

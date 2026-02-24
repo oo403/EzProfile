@@ -4,6 +4,7 @@ import dev.rollczi.litecommands.annotations.command.Command
 import dev.rollczi.litecommands.annotations.context.Context
 import dev.rollczi.litecommands.annotations.execute.Execute
 import dev.rollczi.litecommands.annotations.permission.Permission
+import eu.okaeri.configs.exception.OkaeriException
 import org.bukkit.command.CommandSender
 import org.sirox.ezprofile.EzProfile
 
@@ -13,7 +14,14 @@ class ReloadCommand(private val plugin: EzProfile) {
     @Execute(name = "reload")
     @Permission("profile.admin.reload")
     fun executeReload(@Context sender: CommandSender) {
-        plugin.configs.reloadConfigs()
+        try {
+            plugin.configs.reloadConfigs()
+        } catch (e: OkaeriException) {
+            e.printStackTrace()
+            sender.sendMessage(plugin.configs.messageConfig.reloadErrorMessage)
+        }
+
+        sender.sendMessage(plugin.configs.messageConfig.reloadMessage)
     }
 
 }
