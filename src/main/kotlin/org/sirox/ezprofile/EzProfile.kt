@@ -1,5 +1,6 @@
 package org.sirox.ezprofile
 
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import org.sirox.ezprofile.util.CommandUtil
 import org.sirox.ezprofile.util.ConfigUtil

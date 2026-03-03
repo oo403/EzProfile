@@ -2,3 +2,9 @@ name: EzProfile
 version: '1.0'
 main: org.sirox.ezprofile.EzProfile
 api-version: '1.21'
+
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false

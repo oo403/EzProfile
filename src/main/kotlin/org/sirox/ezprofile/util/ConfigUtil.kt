@@ -4,7 +4,7 @@ import eu.okaeri.configs.ConfigManager
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer
 import eu.okaeri.configs.yaml.bukkit.serdes.SerdesBukkit
 import org.sirox.ezprofile.EzProfile
-import org.sirox.ezprofile.config.Config
+import org.sirox.ezprofile.config.GeneralConfig
 import org.sirox.ezprofile.config.InventoryConfig
 import org.sirox.ezprofile.config.MessageConfig
 import java.io.File
@@ -13,7 +13,7 @@ class ConfigUtil(private val plugin: EzProfile) {
 
     val configFile: File = File(plugin.dataFolder, "config.yml")
 
-    var config: Config = ConfigManager.create(Config::class.java) { it ->
+    var config: GeneralConfig = ConfigManager.create(GeneralConfig::class.java) { it ->
         it.configure { opt ->
             opt.configurer(YamlBukkitConfigurer(), SerdesBukkit())
             opt.bindFile(configFile)

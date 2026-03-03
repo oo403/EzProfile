@@ -7,19 +7,19 @@ import dev.rollczi.litecommands.annotations.optional.OptionalArg
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.sirox.ezprofile.EzProfile
-import org.sirox.ezprofile.inventory.VanillaInventory
+import org.sirox.ezprofile.inventory.GeneralInventory
 
 @Command(name = "profile")
 class ProfileCommand(private val plugin: EzProfile) {
 
-    private val vanillaInventory = VanillaInventory()
+    private val inventory = GeneralInventory(plugin)
 
     @Execute
     fun executeProfile(@Context sender: CommandSender, @OptionalArg player: Player?) {
         if (player == null) {
-            vanillaInventory.openInventory(sender as Player)
+            inventory.openInventory(sender as Player)
         } else {
-            vanillaInventory.openInventory(player)
+            inventory.openInventory(player)
         }
     }
 

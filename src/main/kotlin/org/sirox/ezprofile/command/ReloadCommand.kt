@@ -5,6 +5,8 @@ import dev.rollczi.litecommands.annotations.context.Context
 import dev.rollczi.litecommands.annotations.execute.Execute
 import dev.rollczi.litecommands.annotations.permission.Permission
 import eu.okaeri.configs.exception.OkaeriException
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import org.sirox.ezprofile.EzProfile
 
@@ -18,10 +20,15 @@ class ReloadCommand(private val plugin: EzProfile) {
             plugin.configs.reloadConfigs()
         } catch (e: OkaeriException) {
             e.printStackTrace()
-            sender.sendMessage(plugin.configs.messageConfig.reloadErrorMessage)
+
+            val errorMessage: Component = MiniMessage.miniMessage().deserialize(plugin.configs.messageConfig.reloadErrorMessage)
+
+            sender.sendMessage(errorMessage)
         }
 
-        sender.sendMessage(plugin.configs.messageConfig.reloadMessage)
+        val successMessage: Component = MiniMessage.miniMessage().deserialize(plugin.configs.messageConfig.reloadMessage)
+
+        sender.sendMessage(successMessage)
     }
 
 }

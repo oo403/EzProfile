@@ -11,6 +11,7 @@ repositories {
     mavenCentral()
     maven("https://repo.okaeri.cloud/releases")
     maven("https://repo.panda-lang.org/releases")
+    maven("https://repo.extendedclip.com/releases/")
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc-repo"
     }
@@ -21,6 +22,7 @@ dependencies {
     runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.10")
 
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("me.clip:placeholderapi:2.12.2")
 
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("eu.okaeri:okaeri-configs-serdes-bukkit:6.1.0-beta.1")
@@ -40,9 +42,9 @@ tasks {
         archiveFileName.set("${project.name}-${project.version}.jar")
         destinationDirectory.set(file("$buildDir/libs"))
 
-        relocate("dev.triumph.gui", "org.sirox.ezprofile.gui")
-        relocate("eu.okaeri.configs", "org.sirox.ezprofile.configs")
-        relocate("dev.rollczi.litecommands", "org.sirox.ezprofile.commands")
+        relocate("dev.triumph.gui", "org.sirox.libs.ezprofile.gui")
+        relocate("eu.okaeri.configs", "org.sirox.libs.ezprofile.configs")
+        relocate("dev.rollczi.litecommands", "org.sirox.libs.ezprofile.commands")
     }
 
     runServer {
