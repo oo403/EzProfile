@@ -4,6 +4,7 @@ import dev.rollczi.litecommands.annotations.command.Command
 import dev.rollczi.litecommands.annotations.context.Context
 import dev.rollczi.litecommands.annotations.execute.Execute
 import dev.rollczi.litecommands.annotations.optional.OptionalArg
+import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.sirox.ezprofile.EzProfile
@@ -17,9 +18,9 @@ class ProfileCommand(private val plugin: EzProfile) {
     @Execute
     fun executeProfile(@Context sender: CommandSender, @OptionalArg player: Player?) {
         if (player == null) {
-            inventory.openInventory(sender as Player)
+            inventory.openInventory(sender as Player, sender)
         } else {
-            inventory.openInventory(player)
+            inventory.openInventory(sender as Player, player)
         }
     }
 

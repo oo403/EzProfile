@@ -11,4 +11,7 @@ class GeneralConfig : OkaeriConfig() {
     @Comment("Should messages be sent to the console?")
     var logging: Boolean = true
 
+    @Comment("SHIFT + RIGHT click event should be enabled?")
+    var shift = true
+
 }

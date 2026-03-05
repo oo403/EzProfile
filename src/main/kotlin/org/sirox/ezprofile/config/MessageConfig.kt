@@ -21,4 +21,7 @@ class MessageConfig : OkaeriConfig() {
 
     @Comment("Reload message")
     var reloadMessage: String = "<#AAAAAA>[<#5DF083>✔<#AAAAAA>] Plugin has been reloaded"
+
+    @Comment("Wrong action")
+    var wrongActionMessage: String = "<#AAAAAA>[<#F03C3C>✘<#AAAAAA>] Wrong action"
 }
