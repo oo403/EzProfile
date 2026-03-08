@@ -2,7 +2,6 @@ package org.sirox.ezprofile.config
 
 import eu.okaeri.configs.OkaeriConfig
 import eu.okaeri.configs.annotation.Comment
-import org.bukkit.Material
 
 class InventoryConfig : OkaeriConfig() {
 

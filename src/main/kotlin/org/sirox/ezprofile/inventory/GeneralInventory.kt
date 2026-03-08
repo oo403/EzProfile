@@ -121,9 +121,11 @@ class GeneralInventory(private val plugin: EzProfile) {
                 if (guiItem.itemModel.isNotEmpty()) {
                     val key: List<String> = guiItem.itemModel.split(":").map { it.trim() }
 
-                    val namespacedKey = NamespacedKey(key[0], key[1])
+                    if (key.size >= 2) {
+                        val namespacedKey = NamespacedKey(key[0], key[1])
 
-                    itemMeta.itemModel = namespacedKey
+                        itemMeta.itemModel = namespacedKey
+                    }
                 }
 
                 if (guiItem.hideTooltip) {
@@ -137,7 +139,7 @@ class GeneralInventory(private val plugin: EzProfile) {
                         val profile: PlayerProfile = Bukkit.createProfile(UUID.randomUUID())
                         val texture: PlayerTextures = profile.textures
 
-                        texture.skin = URL("http://textures.minecraft.net/texture/87a3987c5cdb35aba9ae6f2e23489aa96e080e93fac435dc640f737b5ca401d3")
+                        texture.skin = URL(guiItem.skinUrl)
                         profile.setTextures(texture)
 
                         itemMeta.playerProfile = profile

@@ -9,15 +9,20 @@
 </div>
 
 <div>
-<h2>📜 License</h2>
-<p>EzProfile is licensed under the GNU GPL v3 license. Check LICENSE file for more informations.</p>
+<h2>👤 EzProfile</h2>
+<p>A Minecraft plugin that adds an advanced player profile system on the server. Thanks to it, each player has their own profile containing statistics, achievements, and information about activity on the server.</p>
 </div>
 
 <div>
 <h2>💡 Features</h2>
 <ul>
-<li>Clean Configuration</li>
-<li>Modern Code</li>
-<li>Fast Support</li>
+<li>Clean Inventory Configuration</li>
+<li>So Much Options To Customize</li>
+<li>Everything Configurable</li>
 </ul>
+</div>
+
+<div>
+<h2>📜 License</h2>
+<p>EzProfile is licensed under the GNU GPL v3 license. Check LICENSE file for more informations.</p>
 </div>
