@@ -9,8 +9,11 @@ import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.sirox.ezprofile.EzProfile
+import org.sirox.ezprofile.util.TextUtil
 
 class PermissionHandler(private val plugin: EzProfile) : MissingPermissionsHandler<CommandSender> {
+
+    val textUtil = TextUtil()
 
     override fun handle(
         invocation: Invocation<CommandSender>,
@@ -23,7 +26,7 @@ class PermissionHandler(private val plugin: EzProfile) : MissingPermissionsHandl
         val rawMessage: String = plugin.configs.messageConfig.missingPermissions
             .replace("<permissions>", permission.toString())
 
-        val message: Component = MiniMessage.miniMessage().deserialize(rawMessage)
+        val message: Component = textUtil.deserializeText(rawMessage)
 
         player.sendMessage(message)
     }

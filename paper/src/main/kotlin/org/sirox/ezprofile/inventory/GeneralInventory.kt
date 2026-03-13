@@ -19,10 +19,13 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.profile.PlayerTextures
 import org.sirox.ezprofile.EzProfile
+import org.sirox.ezprofile.util.TextUtil
 import java.net.URL
 import java.util.UUID
 
 class GeneralInventory(private val plugin: EzProfile) {
+
+    val textUtil = TextUtil()
 
     fun openInventory(sender: Player, player: Player) {
 
@@ -30,9 +33,7 @@ class GeneralInventory(private val plugin: EzProfile) {
         var title: String = plugin.configs.inventoryConfig.title
             .replace("<player>", playerName)
 
-        title = PlaceholderAPI.setPlaceholders(player, title)
-
-        val componentTitle: Component = MiniMessage.miniMessage().deserialize(title)
+        val componentTitle: Component = textUtil.deserializeTextWithPlaceholders(title, player)
         val rows: Int = plugin.configs.inventoryConfig.rows
 
         if (rows !in 1..<7) {

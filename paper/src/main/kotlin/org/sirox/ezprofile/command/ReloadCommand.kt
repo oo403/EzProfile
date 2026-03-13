@@ -9,9 +9,12 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.CommandSender
 import org.sirox.ezprofile.EzProfile
+import org.sirox.ezprofile.util.TextUtil
 
 @Command(name = "profile")
 class ReloadCommand(private val plugin: EzProfile) {
+
+    val textUtil = TextUtil()
 
     @Execute(name = "reload")
     @Permission("profile.admin.reload")
@@ -21,12 +24,12 @@ class ReloadCommand(private val plugin: EzProfile) {
         } catch (e: OkaeriException) {
             e.printStackTrace()
 
-            val errorMessage: Component = MiniMessage.miniMessage().deserialize(plugin.configs.messageConfig.reloadErrorMessage)
+            val errorMessage: Component = textUtil.deserializeText(plugin.configs.messageConfig.reloadErrorMessage)
 
             sender.sendMessage(errorMessage)
         }
 
-        val successMessage: Component = MiniMessage.miniMessage().deserialize(plugin.configs.messageConfig.reloadMessage)
+        val successMessage: Component = textUtil.deserializeText(plugin.configs.messageConfig.reloadMessage)
 
         sender.sendMessage(successMessage)
     }
