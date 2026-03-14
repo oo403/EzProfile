@@ -29,6 +29,9 @@ dependencies {
     implementation("dev.rollczi:litecommands-bukkit:3.10.2")
     implementation("dev.rollczi:litecommands-adventure-platform:3.10.2")
     implementation("dev.triumphteam:triumph-gui:3.1.13")
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.7")
+    implementation("com.h2database:h2:2.4.240")
+    implementation("com.zaxxer:HikariCP:7.0.2")
 }
 
 val targetJavaVersion = 21
@@ -45,6 +48,9 @@ tasks {
         relocate("dev.triumph.gui", "org.sirox.libs.ezprofile.gui")
         relocate("eu.okaeri.configs", "org.sirox.libs.ezprofile.configs")
         relocate("dev.rollczi.litecommands", "org.sirox.libs.ezprofile.commands")
+        relocate("org.h2", "org.sirox.libs.ezprofile.h2")
+        relocate("com.zaxxer.hikari", "org.sirox.libs.ezprofile.hikari")
+        relocate("org.mariadb.jdbc", "org.mariadb.jdbc")
     }
 
     runServer {

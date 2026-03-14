@@ -8,6 +8,7 @@ import me.clip.placeholderapi.PlaceholderAPI
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.sirox.ezprofile.EzProfile
+import org.sirox.ezprofile.database.cache.PlayerCache
 import org.sirox.ezprofile.inventory.GeneralInventory
 
 @Command(name = "profile")
@@ -20,7 +21,11 @@ class ProfileCommand(private val plugin: EzProfile) {
         if (player == null) {
             inventory.openInventory(sender as Player, sender)
         } else {
+            val data = plugin.cache.get(player.uniqueId)
+
             inventory.openInventory(sender as Player, player)
+            sender.sendMessage("${data?.likes}")
+            data?.likes++
         }
     }
 

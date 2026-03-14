@@ -25,7 +25,7 @@ import java.util.UUID
 
 class GeneralInventory(private val plugin: EzProfile) {
 
-    val textUtil = TextUtil()
+    val textUtil = TextUtil(plugin)
 
     fun openInventory(sender: Player, player: Player) {
 
@@ -99,22 +99,17 @@ class GeneralInventory(private val plugin: EzProfile) {
 
             if (itemMeta != null) {
                 if (guiItem.name.isNotEmpty()) {
-                    var rawName = guiItem.name
+                    val rawName = guiItem.name
 
-                    rawName = PlaceholderAPI.setPlaceholders(player, rawName)
-
-                    val name: Component = MiniMessage.miniMessage().deserialize(rawName)
+                    val name: Component = textUtil.deserializeTextWithPlaceholders(rawName, player)
 
                     itemMeta.displayName(name)
                 }
 
                 if (guiItem.lore.isNotEmpty()) {
                     itemMeta.lore(guiItem.lore.stream()
-                        .map{
-                                line -> PlaceholderAPI.setPlaceholders(player, line)
-                        }
                         .map {
-                                line -> MiniMessage.miniMessage().deserialize(line)
+                                line -> textUtil.deserializeTextWithPlaceholders(line, player)
                         }
                         .toList())
                 }
@@ -129,8 +124,18 @@ class GeneralInventory(private val plugin: EzProfile) {
                     }
                 }
 
-                if (guiItem.hideTooltip) {
-                    itemMeta.isHideTooltip = true
+                if (guiItem.tooltipStyle.isNotEmpty()) {
+                    if (guiItem.tooltipStyle == "none") {
+                        itemMeta.isHideTooltip = true
+                    } else {
+                        val key: List<String> = guiItem.tooltipStyle.split(":").map { it.trim() }
+
+                        if (key.size >= 2) {
+                            val namespacedKey = NamespacedKey(key[0], key[1])
+
+                            itemMeta.tooltipStyle = namespacedKey
+                        }
+                    }
                 }
 
                 if (material == Material.PLAYER_HEAD) {
@@ -160,7 +165,9 @@ class GeneralInventory(private val plugin: EzProfile) {
                 event.isCancelled = true
             }
 
-            inventory.setItem(guiItem.slot, item)
+            guiItem.slot.forEach { it ->
+                inventory.setItem(it, item)
+            }
         }
 
 

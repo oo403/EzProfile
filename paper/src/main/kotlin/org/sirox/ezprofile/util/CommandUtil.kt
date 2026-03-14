@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender
 import org.sirox.ezprofile.EzProfile
 import org.sirox.ezprofile.command.ProfileCommand
 import org.sirox.ezprofile.command.ReloadCommand
+import org.sirox.ezprofile.database.cache.PlayerCache
 import org.sirox.ezprofile.handler.PermissionHandler
 import org.sirox.ezprofile.handler.UsageHandler
 

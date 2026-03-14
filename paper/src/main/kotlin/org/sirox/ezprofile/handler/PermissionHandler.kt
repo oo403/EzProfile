@@ -13,7 +13,7 @@ import org.sirox.ezprofile.util.TextUtil
 
 class PermissionHandler(private val plugin: EzProfile) : MissingPermissionsHandler<CommandSender> {
 
-    val textUtil = TextUtil()
+    val textUtil = TextUtil(plugin)
 
     override fun handle(
         invocation: Invocation<CommandSender>,

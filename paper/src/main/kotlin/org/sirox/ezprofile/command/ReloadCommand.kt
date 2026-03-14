@@ -14,7 +14,7 @@ import org.sirox.ezprofile.util.TextUtil
 @Command(name = "profile")
 class ReloadCommand(private val plugin: EzProfile) {
 
-    val textUtil = TextUtil()
+    val textUtil = TextUtil(plugin)
 
     @Execute(name = "reload")
     @Permission("profile.admin.reload")
