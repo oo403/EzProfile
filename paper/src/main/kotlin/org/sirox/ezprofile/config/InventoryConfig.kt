@@ -75,4 +75,7 @@ class InventoryConfig : OkaeriConfig() {
         var action: String = ""
     }
 
+    @Comment("","Anvil GUI Placeholder")
+    var anvilPlaceholder: String = "Type text here!"
+
 }

@@ -21,11 +21,7 @@ class ProfileCommand(private val plugin: EzProfile) {
         if (player == null) {
             inventory.openInventory(sender as Player, sender)
         } else {
-            val data = plugin.cache.get(player.uniqueId)
-
             inventory.openInventory(sender as Player, player)
-            sender.sendMessage("${data?.likes}")
-            data?.likes++
         }
     }
 

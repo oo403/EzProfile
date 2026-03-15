@@ -77,8 +77,7 @@ class DatabaseManager(dataFolder: File, plugin: EzProfile) {
                     CREATE TABLE IF NOT EXISTS ${prefix}_players (
                         uuid VARCHAR(36) PRIMARY KEY,
                         name VARCHAR(16),
-                        likes INT,
-                        dislikes INT
+                        status VARCHAR(255)
                     )
                 """.trimIndent())
             }

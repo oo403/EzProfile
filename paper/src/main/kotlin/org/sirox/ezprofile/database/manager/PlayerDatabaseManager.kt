@@ -18,8 +18,7 @@ class PlayerDatabaseManager(private val plugin: EzProfile, private val dataSourc
                         return PlayerData(
                             uuid,
                             rs.getString("name"),
-                            rs.getInt("likes"),
-                            rs.getInt("dislikes")
+                            rs.getString("status"),
                         )
                     }
                 }
@@ -31,15 +30,14 @@ class PlayerDatabaseManager(private val plugin: EzProfile, private val dataSourc
     fun save(data: PlayerData) {
         dataSource.connection.use { connection ->
             val ps = connection.prepareStatement("""
-                MERGE INTO ${prefix}_players (uuid, name, likes, dislikes)
+                MERGE INTO ${prefix}_players (uuid, name, status)
                 KEY (uuid)
-                VALUES(?,?,?,?)
+                VALUES(?,?,?)
             """.trimIndent())
 
             ps.setString(1, data.uuid.toString())
             ps.setString(2, data.name)
-            ps.setInt(3, data.likes)
-            ps.setInt(4, data.dislikes)
+            ps.setString(3, data.status)
 
             ps.executeUpdate()
             connection.commit()

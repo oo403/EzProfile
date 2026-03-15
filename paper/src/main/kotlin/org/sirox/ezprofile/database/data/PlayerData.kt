@@ -5,6 +5,5 @@ import java.util.UUID
 data class PlayerData(
     val uuid: UUID,
     var name: String,
-    var likes: Int,
-    var dislikes: Int
+    var status: String
 )

@@ -10,6 +10,7 @@ import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.sound.Sound.Source
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
+import net.wesjd.anvilgui.AnvilGUI
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -30,6 +31,8 @@ class GeneralInventory(private val plugin: EzProfile) {
     val hmcCosmeticsUtil = HMCCosmeticsUtil()
 
     fun openInventory(sender: Player, player: Player) {
+
+        val playerCache = plugin.cache.get(player.uniqueId)
 
         val playerName: String = player.name
         var title: String = plugin.configs.inventoryConfig.title
@@ -246,6 +249,26 @@ class GeneralInventory(private val plugin: EzProfile) {
                         inventory.addSlotAction(action.slot) {
                             val message: Component = MiniMessage.miniMessage().deserialize(value)
                             sender.sendMessage(message)
+                        }
+                    }
+                    "status" -> {
+                        inventory.addSlotAction(action.slot) {
+                            if(sender == player) {
+                                AnvilGUI.Builder()
+                                    .onClick{slot, stateSnapshot ->
+                                        if(slot == AnvilGUI.Slot.OUTPUT) {
+                                            playerCache?.status = stateSnapshot.text
+                                            listOf(AnvilGUI.ResponseAction.close())
+                                        } else {
+                                            emptyList()
+                                        }
+                                    }
+                                    .preventClose()
+                                    .title(value)
+                                    .text(plugin.configs.inventoryConfig.anvilPlaceholder)
+                                    .plugin(plugin)
+                                    .open(sender)
+                            }
                         }
                     }
                     else -> {

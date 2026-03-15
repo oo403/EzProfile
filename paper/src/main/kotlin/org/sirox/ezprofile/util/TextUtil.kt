@@ -20,8 +20,7 @@ class TextUtil(private val plugin: EzProfile) {
 
         val replacedText: String = text
             .replace("<player>", player.name)
-            .replace("<likes>", playerCache?.likes.toString())
-            .replace("<dislikes>", playerCache?.dislikes.toString())
+            .replace("<status>", playerCache?.status.toString())
         PlaceholderAPI.setPlaceholders(player, replacedText)
 
         val component: Component = MiniMessage.miniMessage().deserialize(replacedText)

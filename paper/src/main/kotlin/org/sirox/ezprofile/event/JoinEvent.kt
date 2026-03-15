@@ -21,7 +21,7 @@ class JoinEvent(private val plugin: EzProfile, private val database: PlayerDatab
             var data = database.load(uuid)
 
             if(data == null){
-                data = PlayerData(uuid, name, 0, 1)
+                data = PlayerData(uuid, name, "Empty")
             }
 
             cache.put(data)

@@ -13,6 +13,7 @@ repositories {
     maven("https://repo.panda-lang.org/releases")
     maven("https://repo.extendedclip.com/releases/")
     maven("https://repo.hibiscusmc.com/releases/")
+    maven("https://mvn.wesjd.net/")
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc-repo"
     }
@@ -28,9 +29,13 @@ dependencies {
 
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("eu.okaeri:okaeri-configs-serdes-bukkit:6.1.0-beta.1")
+
     implementation("dev.rollczi:litecommands-bukkit:3.10.2")
     implementation("dev.rollczi:litecommands-adventure-platform:3.10.2")
+
     implementation("dev.triumphteam:triumph-gui:3.1.13")
+    implementation("net.wesjd:anvilgui:1.10.11-SNAPSHOT")
+
     implementation("org.mariadb.jdbc:mariadb-java-client:3.5.7")
     implementation("com.h2database:h2:2.4.240")
     implementation("com.zaxxer:HikariCP:7.0.2")
@@ -57,6 +62,7 @@ tasks {
         relocate("org.postgresql", "org.sirox.libs.ezprofile.pgsql")
         relocate("com.mysql", "org.sirox.libs.ezprofile.mysql")
         relocate("org.h2", "org.sirox.libs.ezprofile.h2")
+        relocate("net.wesjd.anvilgui", "org.sirox.libs.ezprofile.anvilgui")
     }
 
     runServer {
