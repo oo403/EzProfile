@@ -22,6 +22,9 @@ class MessageConfig : OkaeriConfig() {
     @Comment("","Reload message")
     var reloadMessage: String = "<#AAAAAA>[<#5DF083>✔<#AAAAAA>] Plugin has been reloaded"
 
-    @Comment("","Wrong action")
+    @Comment("","Wrong action message")
     var wrongActionMessage: String = "<#AAAAAA>[<#F03C3C>✘<#AAAAAA>] Wrong action"
+
+    @Comment("","Not profile owner error message")
+    var notProfileOwner: String = "<#AAAAAA>[<#F03C3C>✘<#AAAAAA>] You are not owner of that profile"
 }

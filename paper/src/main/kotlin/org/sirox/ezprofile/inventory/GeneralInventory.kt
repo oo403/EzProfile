@@ -229,25 +229,26 @@ class GeneralInventory(private val plugin: EzProfile) {
                 val (tag, value) = match.destructured
                 val lowerTag: String = tag.lowercase()
 
-                value.replace("<sender>", sender.name)
-                value.replace("<player>", player.name)
+                val replacedValue = value
+                    .replace("<sender>", sender.name)
+                    .replace("<player>", player.name)
 
-                PlaceholderAPI.setPlaceholders(player, value)
+                PlaceholderAPI.setPlaceholders(player, replacedValue)
 
                 when (lowerTag) {
                     "console" -> {
                         inventory.addSlotAction(action.slot) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), value)
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), replacedValue)
                         }
                     }
                     "player" -> {
                         inventory.addSlotAction(action.slot) {
-                            sender.performCommand(value)
+                            sender.performCommand(replacedValue)
                         }
                     }
                     "message" -> {
                         inventory.addSlotAction(action.slot) {
-                            val message: Component = MiniMessage.miniMessage().deserialize(value)
+                            val message: Component = MiniMessage.miniMessage().deserialize(replacedValue)
                             sender.sendMessage(message)
                         }
                     }
@@ -268,6 +269,8 @@ class GeneralInventory(private val plugin: EzProfile) {
                                     .text(plugin.configs.inventoryConfig.anvilPlaceholder)
                                     .plugin(plugin)
                                     .open(sender)
+                            } else {
+                                sender.sendMessage(textUtil.deserializeText(plugin.configs.messageConfig.notProfileOwner))
                             }
                         }
                     }
