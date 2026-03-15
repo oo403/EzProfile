@@ -2,6 +2,7 @@ package org.sirox.ezprofile.database.manager
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import org.bukkit.Bukkit
 import org.sirox.ezprofile.EzProfile
 import java.io.File
 import javax.sql.DataSource
@@ -11,17 +12,50 @@ class DatabaseManager(dataFolder: File, plugin: EzProfile) {
     val dataSource: DataSource
 
     init {
-        val dbFile = File("${plugin.dataFolder}/database", "database.db")
+        val type = plugin.configs.databaseConfig.type
+
+        val host = plugin.configs.databaseConfig.database.host
+        val port = plugin.configs.databaseConfig.database.port
+        val name = plugin.configs.databaseConfig.database.name
 
         val dbConfig = HikariConfig().apply {
-            jdbcUrl = "jdbc:h2:file:${dbFile.absolutePath};MODE=MySQL"
+            when (type.lowercase()) {
+                "h2" -> {
+                    val dbFile = File("${plugin.dataFolder}/database", "database.db")
 
-            driverClassName = "org.h2.Driver"
-            maximumPoolSize = 3
+                    jdbcUrl = "jdbc:h2:file:${dbFile.absolutePath};MODE=MySQL"
+                    driverClassName = "org.h2.Driver"
+                }
+
+                "mysql" -> {
+                    jdbcUrl = "jdbc:mysql://${host}:${port}/${name}"
+                    driverClassName = "com.mysql.cj.jdbc.Driver"
+                }
+
+                "mariadb" -> {
+                    jdbcUrl = "jdbc:mariadb://${host}:${port}/${name}"
+                    driverClassName = "com.mariadb.jdbc.Driver"
+                }
+
+                "postgresql" -> {
+                    jdbcUrl = "jdbc:postgresql://${host}:${port}/${name}"
+                    driverClassName = "org.postgresql.Driver"
+                }
+
+                else -> {
+                    plugin.logger.warn("Unsupported database type: $type. Disabling plugin...")
+                    Bukkit.getPluginManager().disablePlugin(plugin)
+                }
+            }
+
+            username = plugin.configs.databaseConfig.database.username
+            password = plugin.configs.databaseConfig.database.password
+
+            maximumPoolSize = 10
             isAutoCommit = false
             transactionIsolation = "TRANSACTION_REPEATABLE_READ"
 
-            poolName = "h2"
+            poolName = "EzProfilePool"
         }
 
         dataSource = HikariDataSource(dbConfig)

@@ -34,6 +34,8 @@ dependencies {
     implementation("org.mariadb.jdbc:mariadb-java-client:3.5.7")
     implementation("com.h2database:h2:2.4.240")
     implementation("com.zaxxer:HikariCP:7.0.2")
+    implementation("mysql:mysql-connector-java:8.0.33")
+    implementation("org.postgresql:postgresql:42.7.10")
 }
 
 val targetJavaVersion = 21
@@ -50,9 +52,11 @@ tasks {
         relocate("dev.triumph.gui", "org.sirox.libs.ezprofile.gui")
         relocate("eu.okaeri.configs", "org.sirox.libs.ezprofile.configs")
         relocate("dev.rollczi.litecommands", "org.sirox.libs.ezprofile.commands")
-        relocate("org.h2", "org.sirox.libs.ezprofile.h2")
         relocate("com.zaxxer.hikari", "org.sirox.libs.ezprofile.hikari")
-        relocate("org.mariadb.jdbc", "org.mariadb.jdbc")
+        relocate("org.mariadb.jdbc", "org.sirox.libs.ezprofile.jdbc")
+        relocate("org.postgresql", "org.sirox.libs.ezprofile.pgsql")
+        relocate("com.mysql", "org.sirox.libs.ezprofile.mysql")
+        relocate("org.h2", "org.sirox.libs.ezprofile.h2")
     }
 
     runServer {
