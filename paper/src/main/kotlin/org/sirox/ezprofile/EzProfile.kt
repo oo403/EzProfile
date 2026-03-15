@@ -21,12 +21,13 @@ class EzProfile : JavaPlugin() {
     lateinit var cache: PlayerCache
 
     override fun onEnable() {
+        configs = ConfigUtil(this)
+        commands = CommandUtil(this)
+
         database = DatabaseManager(this.dataFolder, this)
         playerDatabase = PlayerDatabaseManager(database.dataSource)
         cache = PlayerCache()
 
-        configs = ConfigUtil(this)
-        commands = CommandUtil(this)
         events = EventUtil(this, playerDatabase, cache)
         logger = LoggerFactory.getLogger(configs.config.pluginName)
 

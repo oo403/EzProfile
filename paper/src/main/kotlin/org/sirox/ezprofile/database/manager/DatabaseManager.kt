@@ -30,16 +30,25 @@ class DatabaseManager(dataFolder: File, plugin: EzProfile) {
                 "mysql" -> {
                     jdbcUrl = "jdbc:mysql://${host}:${port}/${name}"
                     driverClassName = "com.mysql.cj.jdbc.Driver"
+
+                    username = plugin.configs.databaseConfig.database.username
+                    password = plugin.configs.databaseConfig.database.password
                 }
 
                 "mariadb" -> {
                     jdbcUrl = "jdbc:mariadb://${host}:${port}/${name}"
                     driverClassName = "com.mariadb.jdbc.Driver"
+
+                    username = plugin.configs.databaseConfig.database.username
+                    password = plugin.configs.databaseConfig.database.password
                 }
 
                 "postgresql" -> {
                     jdbcUrl = "jdbc:postgresql://${host}:${port}/${name}"
                     driverClassName = "org.postgresql.Driver"
+
+                    username = plugin.configs.databaseConfig.database.username
+                    password = plugin.configs.databaseConfig.database.password
                 }
 
                 else -> {
@@ -47,9 +56,6 @@ class DatabaseManager(dataFolder: File, plugin: EzProfile) {
                     Bukkit.getPluginManager().disablePlugin(plugin)
                 }
             }
-
-            username = plugin.configs.databaseConfig.database.username
-            password = plugin.configs.databaseConfig.database.password
 
             maximumPoolSize = 10
             isAutoCommit = false
