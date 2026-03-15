@@ -4,6 +4,7 @@ import eu.okaeri.configs.ConfigManager
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer
 import eu.okaeri.configs.yaml.bukkit.serdes.SerdesBukkit
 import org.sirox.ezprofile.EzProfile
+import org.sirox.ezprofile.config.DatabaseConfig
 import org.sirox.ezprofile.config.GeneralConfig
 import org.sirox.ezprofile.config.InventoryConfig
 import org.sirox.ezprofile.config.MessageConfig
@@ -41,15 +42,25 @@ class ConfigUtil(private val plugin: EzProfile) {
         }
     }
 
+    val databaseConfigFile: File = File(plugin.dataFolder, "database.yml")
+
+    var databaseConfig: DatabaseConfig = ConfigManager.create(DatabaseConfig::class.java) { it ->
+        it.configure { opt ->
+            opt.configurer(YamlBukkitConfigurer(), SerdesBukkit())
+            opt.bindFile(databaseConfigFile)
+            opt.resolvePlaceholders()
+        }
+    }
+
     fun initializeConfigs() {
-        listOf(config, inventoryConfig, messageConfig).forEach{ it ->
+        listOf(config, inventoryConfig, messageConfig, databaseConfig).forEach{ it ->
             it.saveDefaults()
             it.load(true)
         }
     }
 
     fun reloadConfigs() {
-        listOf(config, inventoryConfig, messageConfig).forEach{ it ->
+        listOf(config, inventoryConfig, messageConfig, databaseConfig).forEach{ it ->
             it.load(true)
         }
     }

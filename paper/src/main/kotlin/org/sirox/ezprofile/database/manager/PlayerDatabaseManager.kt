@@ -43,4 +43,15 @@ class PlayerDatabaseManager(private val dataSource: DataSource) {
         }
     }
 
+    fun remove(uuid: UUID) {
+        dataSource.connection.use { connection ->
+            connection.prepareStatement("DELETE FROM players WHERE uuid = ?").use { ps ->
+                ps.setString(1, uuid.toString())
+
+                ps.executeUpdate()
+                connection.commit()
+            }
+        }
+    }
+
 }
