@@ -7,17 +7,17 @@ class DatabaseConfig : OkaeriConfig() {
 
     @Comment("Database Type")
     @Comment("H2 / MYSQL / MARIADB / POSTGRESQL")
-    val type: String = "H2"
+    var type: String = "H2"
 
     @Comment("","Database Login Credentials")
-    val database: Database = Database()
+    var database: Database = Database()
 
     class Database : OkaeriConfig() {
-        val host: String = "localhost"
-        val port: Int = 8080
-        val username: String = "root"
-        val password: String = "root"
-        val name: String = "root"
+        var host: String = "localhost"
+        var port: Int = 8080
+        var username: String = "root"
+        var password: String = "root"
+        var name: String = "root"
     }
 
 }
