@@ -210,7 +210,22 @@ class GeneralInventory(private val plugin: EzProfile) {
             }
 
             guiItem.slot.forEach { it ->
-                inventory.setItem(it, item)
+                if (guiItem.whoCanSee.isNotEmpty()) {
+                    when (guiItem.whoCanSee) {
+                        "owner" -> {
+                            if (sender == player) {
+                                inventory.setItem(it, item)
+                            }
+                        }
+                        "admin" -> {
+                            if (sender.hasPermission("ezprofile.admin.seeitems")) {
+                                inventory.setItem(it, item)
+                            }
+                        }
+                    }
+                } else {
+                    inventory.setItem(it, item)
+                }
             }
         }
 

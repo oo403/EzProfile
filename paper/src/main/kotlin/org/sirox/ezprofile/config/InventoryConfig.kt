@@ -68,6 +68,10 @@ class InventoryConfig : OkaeriConfig() {
         @Comment("Example: http://textures.minecraft.net/texture/87a3987c5cdb35aba9ae6f2e23489aa96e080e93fac435dc640f737b5ca401d3")
         @Comment("Use empty value to use player profile head")
         var skinUrl: String = ""
+        @Comment("Who can see item?")
+        @Comment("owner / admin")
+        @Comment("Leave empty for everyone")
+        var whoCanSee: String = ""
     }
 
     class GuiAction : OkaeriConfig() {

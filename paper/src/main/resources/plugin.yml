@@ -11,3 +11,11 @@ dependencies:
     HMCCosmetics:
       load: BEFORE
       required: false
+
+
+libraries:
+  - org.mariadb.jdbc:mariadb-java-client:3.5.7
+  - com.h2database:h2:2.4.240
+  - com.zaxxer:HikariCP:7.0.2
+  - mysql:mysql-connector-java:8.0.33
+  - org.postgresql:postgresql:42.7.10

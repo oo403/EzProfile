@@ -23,24 +23,24 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.10")
 
-    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    compileOnly("me.clip:placeholderapi:2.12.2")
-    compileOnly("com.hibiscusmc:HMCCosmetics:2.9.0")
-
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("eu.okaeri:okaeri-configs-serdes-bukkit:6.1.0-beta.1")
 
     implementation("dev.rollczi:litecommands-bukkit:3.10.2")
     implementation("dev.rollczi:litecommands-adventure-platform:3.10.2")
 
-    implementation("dev.triumphteam:triumph-gui:3.1.13")
     implementation("net.wesjd:anvilgui:1.10.11-SNAPSHOT")
+    implementation("dev.triumphteam:triumph-gui:3.1.13")
 
-    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.7")
-    implementation("com.h2database:h2:2.4.240")
-    implementation("com.zaxxer:HikariCP:7.0.2")
-    implementation("mysql:mysql-connector-java:8.0.33")
-    implementation("org.postgresql:postgresql:42.7.10")
+    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("me.clip:placeholderapi:2.12.2")
+    compileOnly("com.hibiscusmc:HMCCosmetics:2.9.0")
+
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.7")
+    compileOnly("com.h2database:h2:2.4.240")
+    compileOnly("com.zaxxer:HikariCP:7.0.2")
+    compileOnly("mysql:mysql-connector-java:8.0.33")
+    compileOnly("org.postgresql:postgresql:42.7.10")
 }
 
 val targetJavaVersion = 21
@@ -51,18 +51,13 @@ kotlin {
 
 tasks {
     shadowJar {
-        archiveFileName.set("${project.name}-${project.version}.jar")
+        archiveFileName.set("EzProfile-${project.version}.jar")
         destinationDirectory.set(file("$buildDir/libs"))
 
-        relocate("dev.triumph.gui", "org.sirox.libs.ezprofile.gui")
         relocate("eu.okaeri.configs", "org.sirox.libs.ezprofile.configs")
         relocate("dev.rollczi.litecommands", "org.sirox.libs.ezprofile.commands")
-        relocate("com.zaxxer.hikari", "org.sirox.libs.ezprofile.hikari")
-        relocate("org.mariadb.jdbc", "org.sirox.libs.ezprofile.jdbc")
-        relocate("org.postgresql", "org.sirox.libs.ezprofile.pgsql")
-        relocate("com.mysql", "org.sirox.libs.ezprofile.mysql")
-        relocate("org.h2", "org.sirox.libs.ezprofile.h2")
         relocate("net.wesjd.anvilgui", "org.sirox.libs.ezprofile.anvilgui")
+        relocate("dev.triumphteam.gui", "org.sirox.libs.ezprofile.gui")
     }
 
     runServer {
