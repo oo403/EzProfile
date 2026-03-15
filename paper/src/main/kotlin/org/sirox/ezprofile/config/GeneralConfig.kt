@@ -8,10 +8,10 @@ class GeneralConfig : OkaeriConfig() {
     @Comment("Plugin name displayed in the console")
     var pluginName: String = "EzProfile"
 
-    @Comment("Should messages be sent to the console?")
+    @Comment("","Should messages be sent to the console?")
     var logging: Boolean = true
 
-    @Comment("SHIFT + RIGHT click event should be enabled?")
+    @Comment("","SHIFT + RIGHT click event should be enabled?")
     var shift = true
 
 }

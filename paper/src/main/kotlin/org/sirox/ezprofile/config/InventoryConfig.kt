@@ -9,10 +9,10 @@ class InventoryConfig : OkaeriConfig() {
     @Comment("<player> - playername placeholder")
     var title: String = "<player>"
 
-    @Comment("Rows of the inventory")
+    @Comment("","Rows of the inventory")
     var rows: Int = 4
 
-    @Comment("Sounds in inventory")
+    @Comment("","Sounds in inventory")
     var sounds: MutableMap<String, Sounds> = mutableMapOf(
         "open" to Sounds().apply {
             enabled = true
@@ -24,7 +24,7 @@ class InventoryConfig : OkaeriConfig() {
         }
     )
 
-    @Comment("Items in inventory")
+    @Comment("","Items in inventory")
     var items: MutableMap<String, GuiItem> = mutableMapOf(
         "helmet" to GuiItem().apply {
             material = "<helmet>"
@@ -49,7 +49,7 @@ class InventoryConfig : OkaeriConfig() {
 
     )
 
-    @Comment("Actions in inventory")
+    @Comment("","Actions in inventory")
     var actions: MutableMap<String, GuiAction> = mutableMapOf()
 
     class Sounds : OkaeriConfig() {
