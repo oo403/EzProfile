@@ -12,6 +12,7 @@ repositories {
     maven("https://repo.okaeri.cloud/releases")
     maven("https://repo.panda-lang.org/releases")
     maven("https://repo.extendedclip.com/releases/")
+    maven("https://repo.hibiscusmc.com/releases/")
     maven("https://repo.papermc.io/repository/maven-public/") {
         name = "papermc-repo"
     }
@@ -23,6 +24,7 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.12.2")
+    compileOnly("com.hibiscusmc:HMCCosmetics:2.9.0")
 
     implementation("eu.okaeri:okaeri-configs-yaml-bukkit:6.1.0-beta.1")
     implementation("eu.okaeri:okaeri-configs-serdes-bukkit:6.1.0-beta.1")

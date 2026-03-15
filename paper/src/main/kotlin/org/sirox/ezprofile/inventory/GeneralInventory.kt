@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.profile.PlayerTextures
 import org.sirox.ezprofile.EzProfile
+import org.sirox.ezprofile.util.HMCCosmeticsUtil
 import org.sirox.ezprofile.util.TextUtil
 import java.net.URL
 import java.util.UUID
@@ -26,6 +27,7 @@ import java.util.UUID
 class GeneralInventory(private val plugin: EzProfile) {
 
     val textUtil = TextUtil(plugin)
+    val hmcCosmeticsUtil = HMCCosmeticsUtil()
 
     fun openInventory(sender: Player, player: Player) {
 
@@ -77,23 +79,62 @@ class GeneralInventory(private val plugin: EzProfile) {
         plugin.configs.inventoryConfig.items.forEach{ (key, guiItem) ->
 
             val amount = guiItem.amount
+            var itemStack: ItemStack = ItemStack(Material.AIR)
 
-            val material: Material = Material.matchMaterial(guiItem.material) ?: run {
-                when (guiItem.material.lowercase()) {
-                    "<helmet>" -> player.inventory.helmet?.type ?: Material.AIR
-                    "<chestplate>" -> player.inventory.chestplate?.type ?: Material.AIR
-                    "<leggings>" -> player.inventory.leggings?.type ?: Material.AIR
-                    "<boots>" -> player.inventory.boots?.type ?: Material.AIR
-                    "<mainhand>" -> player.inventory.itemInMainHand.type
-                    "<offhand>" -> player.inventory.itemInOffHand.type
-                    else -> {
-                        plugin.logger.info("Invalid material ${guiItem.material} in item $key")
-                        Material.AIR
-                    }
+            when (guiItem.material.lowercase()) {
+                "<hmcc_helmet>" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "helmet")
+                }
+                "<hmcc_chestplate>" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "chestplate")
+                }
+                "<hmcc_leggings>" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "leggings")
+                }
+                "<hmcc_boots>" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "boots")
+                }
+                "<hmcc_mainhand" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "mainhand")
+                }
+                "<hmcc_offhand>" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "offhand")
+                }
+                "<hmcc_backpack>" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "backpack")
+                }
+                "<hmcc_balloon>" -> {
+                    itemStack = hmcCosmeticsUtil.getCosmetic(player.uniqueId, "balloon")
+                }
+                "<helmet>" -> {
+                    val material = player.inventory.helmet?.type ?: Material.AIR
+                    itemStack = ItemStack(material)
+                }
+                "<chestplate>" -> {
+                    val material = player.inventory.chestplate?.type ?: Material.AIR
+                    itemStack = ItemStack(material)
+                }
+                "<leggings>" -> {
+                    val material = player.inventory.leggings?.type ?: Material.AIR
+                    itemStack = ItemStack(material)
+                }
+                "<boots>" -> {
+                    val material = player.inventory.boots?.type ?: Material.AIR
+                    itemStack = ItemStack(material)
+                }
+                "<mainhand>" -> {
+                    val material = player.inventory.itemInMainHand.type
+                    itemStack = ItemStack(material)
+                }
+                "<offhand>" -> {
+                    val material = player.inventory.itemInOffHand.type
+                    itemStack = ItemStack(material)
+                }
+                else -> {
+                    val material = Material.matchMaterial(guiItem.material.lowercase()) ?: Material.AIR
+                    itemStack = ItemStack(material)
                 }
             }
-
-            val itemStack = ItemStack(material, amount)
 
             var itemMeta = itemStack.itemMeta
 
@@ -138,7 +179,7 @@ class GeneralInventory(private val plugin: EzProfile) {
                     }
                 }
 
-                if (material == Material.PLAYER_HEAD) {
+                if (itemStack.type == Material.PLAYER_HEAD) {
                     itemMeta = itemMeta as SkullMeta
 
                     if (guiItem.skinUrl.isNotEmpty()) {

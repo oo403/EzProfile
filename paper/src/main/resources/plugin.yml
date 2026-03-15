@@ -8,3 +8,6 @@ dependencies:
     PlaceholderAPI:
       load: BEFORE
       required: false
+    HMCCosmetics:
+      load: BEFORE
+      required: false
