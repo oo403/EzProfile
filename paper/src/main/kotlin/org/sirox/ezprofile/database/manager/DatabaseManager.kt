@@ -10,6 +10,7 @@ import javax.sql.DataSource
 class DatabaseManager(dataFolder: File, plugin: EzProfile) {
 
     val dataSource: DataSource
+    val prefix = plugin.configs.databaseConfig.prefix
 
     init {
         val type = plugin.configs.databaseConfig.type
@@ -73,7 +74,7 @@ class DatabaseManager(dataFolder: File, plugin: EzProfile) {
         dataSource.connection.use { connection ->
             connection.createStatement().use { statement ->
                 statement.execute("""
-                    CREATE TABLE IF NOT EXISTS players (
+                    CREATE TABLE IF NOT EXISTS ${prefix}_players (
                         uuid VARCHAR(36) PRIMARY KEY,
                         name VARCHAR(16),
                         likes INT,

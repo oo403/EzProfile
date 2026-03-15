@@ -9,6 +9,9 @@ class DatabaseConfig : OkaeriConfig() {
     @Comment("H2 / MYSQL / MARIADB / POSTGRESQL")
     var type: String = "H2"
 
+    @Comment("Database Table Prefix")
+    var prefix: String = "ezprofile"
+
     @Comment("","Database Login Credentials")
     var database: Database = Database()
 

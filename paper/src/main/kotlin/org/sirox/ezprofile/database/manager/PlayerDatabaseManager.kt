@@ -1,14 +1,17 @@
 package org.sirox.ezprofile.database.manager
 
+import org.sirox.ezprofile.EzProfile
 import org.sirox.ezprofile.database.data.PlayerData
 import java.util.UUID
 import javax.sql.DataSource
 
-class PlayerDatabaseManager(private val dataSource: DataSource) {
+class PlayerDatabaseManager(private val plugin: EzProfile, private val dataSource: DataSource) {
+
+    val prefix = plugin.configs.databaseConfig.prefix
 
     fun load(uuid: UUID): PlayerData? {
         dataSource.connection.use { connection ->
-            connection.prepareStatement("SELECT * FROM players WHERE uuid = ?").use { ps ->
+            connection.prepareStatement("SELECT * FROM ${prefix}_players WHERE uuid = ?").use { ps ->
                 ps.setString(1, uuid.toString())
                 ps.executeQuery().use { rs ->
                     if (rs.next()) {
@@ -28,7 +31,7 @@ class PlayerDatabaseManager(private val dataSource: DataSource) {
     fun save(data: PlayerData) {
         dataSource.connection.use { connection ->
             val ps = connection.prepareStatement("""
-                MERGE INTO players (uuid, name, likes, dislikes)
+                MERGE INTO ${prefix}_players (uuid, name, likes, dislikes)
                 KEY (uuid)
                 VALUES(?,?,?,?)
             """.trimIndent())
@@ -45,7 +48,7 @@ class PlayerDatabaseManager(private val dataSource: DataSource) {
 
     fun remove(uuid: UUID) {
         dataSource.connection.use { connection ->
-            connection.prepareStatement("DELETE FROM players WHERE uuid = ?").use { ps ->
+            connection.prepareStatement("DELETE FROM ${prefix}_players WHERE uuid = ?").use { ps ->
                 ps.setString(1, uuid.toString())
 
                 ps.executeUpdate()

@@ -25,7 +25,7 @@ class EzProfile : JavaPlugin() {
         commands = CommandUtil(this)
 
         database = DatabaseManager(this.dataFolder, this)
-        playerDatabase = PlayerDatabaseManager(database.dataSource)
+        playerDatabase = PlayerDatabaseManager(this, database.dataSource)
         cache = PlayerCache()
 
         events = EventUtil(this, playerDatabase, cache)
